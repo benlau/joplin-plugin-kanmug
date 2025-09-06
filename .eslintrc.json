@@ -1,80 +1,100 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "mocha": true,
-        "jest": true
-    },
-    "globals": {
-        "module": true,
-        "webviewApi": true,
-        "messenger": true,
-        "CodeMirror": true,
-        "DDDot": true,
-        "CodeMirror5Manager": true,
-        "App": true
-    },
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "react-hooks",
-        "@typescript-eslint",
-        "react"
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "module": true,
+    "webviewApi": true,
+    "messenger": true,
+    "CodeMirror": true,
+    "DDDot": true,
+    "CodeMirror5Manager": true,
+    "App": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-hooks", "@typescript-eslint", "react"],
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "indent": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "import/extensions": "off",
+    "no-await-in-loop": "off",
+    "class-methods-use-this": "off",
+    "import/no-unresolved": "off",
+    "quotes": "off",
+    "no-shadow": "off",
+    "no-promise-executor-return": "off",
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-plusplus": "off",
+    "no-console": ["error", { "allow": ["warn", "error", "info"] }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
     ],
-    "extends": [
-        "airbnb-base",
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended"
-    ],
-    "rules": {
-        "indent": ["error", 4],
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/ban-types": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "import/extensions": "off",
-        "no-await-in-loop": "off",
-        "class-methods-use-this": "off",
-        "import/no-unresolved": "off",
-        "quotes": [2, "double"],
-        "no-shadow": "off",
-        "no-promise-executor-return": "off",
-        "no-underscore-dangle": "off",
-        "no-restricted-syntax": "off",
-        "@typescript-eslint/no-shadow": ["error"],
-        "no-plusplus": "off",
-        "no-console": ["error", { "allow": ["warn", "error"] }],
-        "@typescript-eslint/no-unused-vars": [
-            "warn",
-            {
-                "argsIgnorePattern": "^_",
-                "varsIgnorePattern": "^_",
-                "caughtErrorsIgnorePattern": "^_"
-            }
-        ],
-        "import/prefer-default-export": "off",
-        "no-empty-function": "off",
-        "no-alert": "off",
-        "react-hooks/exhaustive-deps": "error",
-        "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off",
-        "camelcase": "off",
-        "@typescript-eslint/naming-convention": [
-            "error",
-            {
-                "selector": "default",
-                "format": ["camelCase", "snake_case", "PascalCase", "UPPER_CASE"],
-                "leadingUnderscore": "allow"
-            }
-        ],
-        "max-classes-per-file": "off"
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
+    "import/prefer-default-export": "off",
+    "no-empty-function": "off",
+    "no-alert": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "camelcase": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "max-classes-per-file": "off",
+    "no-useless-constructor": "off",
+    "comma-dangle": "off",
+    "operator-linebreak": "off",
+    "guard-for-in": "off",
+    "curly": "off",
+    "nonblock-statement-body-position": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off",
+    "no-return-assign": "off",
+    "default-case": "off",
+    "react/display-name": "off",
+    "no-use-before-define": "off",
+    "react/no-deprecated": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "object-curly-newline": "off",
+    "no-nested-ternary": "off",
+    "radix": "off",
+    "no-confusing-arrow": "off",
+    "func-names": "off",
+    "react/jsx-key": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "consistent-return": "off",
+    "no-param-reassign": "off",
+    "eqeqeq": "off",
+    "no-constant-condition": "off",
+    "no-continue": "off",
+    "no-loop-func": "off",
+    "no-empty": "off",
+    "prefer-destructuring": "off",
+    "max-len": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
-} 
+  }
+}

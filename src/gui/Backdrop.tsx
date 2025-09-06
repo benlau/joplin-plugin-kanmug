@@ -9,63 +9,63 @@ interface BackdropProps {
 }
 
 export function Backdrop({ children, isOpened, onClose }: BackdropProps) {
-    const handleKeyPress = useCallback(
-        (event: KeyboardEvent) => {
-            if (event.key === "Escape" && isOpened) {
-                onClose();
-            }
-        },
-        [isOpened, onClose],
-    );
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpened) {
+        onClose();
+      }
+    },
+    [isOpened, onClose],
+  );
 
-    const onClick = useCallback(
-        (e: React.MouseEvent<HTMLDivElement>) => {
-            onClose();
-        },
-        [onClose],
-    );
+  const onClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      onClose();
+    },
+    [onClose],
+  );
 
-    const onContextMenu = useCallback(
-        (e: React.MouseEvent<HTMLDivElement>) => {
-            onClose();
-        },
-        [onClose],
-    );
+  const onContextMenu = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      onClose();
+    },
+    [onClose],
+  );
 
-    const onWheel = useCallback(
-        (e: React.WheelEvent<HTMLDivElement>) => {
-            onClose();
-        },
-        [onClose],
-    );
+  const onWheel = useCallback(
+    (e: React.WheelEvent<HTMLDivElement>) => {
+      onClose();
+    },
+    [onClose],
+  );
 
-    useEffect(() => {
-        document.addEventListener("keydown", handleKeyPress);
-        return () => {
-            document.removeEventListener("keydown", handleKeyPress);
-        };
-    }, [handleKeyPress]);
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
-    if (!isOpened) {
-        return null;
-    }
+  if (!isOpened) {
+    return null;
+  }
 
-    return (
-        <div
-            style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "transparent",
-                zIndex: Z_INDEX_BACKDROP,
-            }}
-            onClick={onClick}
-            onContextMenu={onContextMenu}
-            onWheel={onWheel}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "transparent",
+        zIndex: Z_INDEX_BACKDROP,
+      }}
+      onClick={onClick}
+      onContextMenu={onContextMenu}
+      onWheel={onWheel}
+    >
+      {children}
+    </div>
+  );
 }

@@ -8,4 +8,4 @@ lint:
 
 .PHONY: format
 format:
-	npm run lint:fix
+	npm run format

@@ -7,8 +7,8 @@ interface MainContextType {
 }
 
 export const MainContext = React.createContext<MainContextType>({
-    dispatch: async () => {},
-    send: async () => {},
+  dispatch: async () => {},
+  send: async () => {},
 });
 
 export const useMainContext = () => React.useContext(MainContext);
