@@ -196,11 +196,11 @@ export function useDraggableCard({
 
   useEffect(() => {
     if (isDragging && !hidden) setHidden(true);
-  }, [isDragging]);
+  }, [isDragging, hidden]);
 
   useEffect(() => {
     if (!isDragWaiting && hidden) setHidden(false);
-  }, [isDragWaiting]);
+  }, [isDragWaiting, hidden]);
 
   const display = hidden ? "none" : "block";
   return { display };

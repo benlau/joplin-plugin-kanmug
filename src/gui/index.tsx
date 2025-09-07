@@ -9,7 +9,7 @@ import { capitalize } from "../utils";
 import { DispatchFn, useRemoteBoard } from "./hooks";
 import { DragDropContext } from "./DragDrop";
 import Column from "./Column";
-import type { Board, BoardState, Message } from "../types";
+import type { BoardState, Message } from "../types";
 import { MainContext, useMainContext } from "./MainContext";
 import {
   RecentKanbansPanel,
@@ -147,11 +147,11 @@ function Content(props: { board?: BoardState }) {
 
   const handleShowRecentKanban = React.useCallback(() => {
     send({ type: "requestToShowRecentKanban" });
-  }, [dispatch]);
+  }, [send]);
 
   const closeKanban = React.useCallback(() => {
     send({ type: "close" });
-  }, [dispatch]);
+  }, [send]);
 
   const cont = board ? (
     <Container>

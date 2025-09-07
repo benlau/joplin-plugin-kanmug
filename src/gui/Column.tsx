@@ -26,12 +26,12 @@ export default function ({ name, link, notes }: Props) {
 
   const [isNoteDragOver, setIsNoteOver] = React.useState(false);
   const _setIsNoteOverDebounced = useDebouncedFunc(
-    async (value: boolean) => setIsNoteOver(false),
+    async (_value: boolean) => setIsNoteOver(false),
     dragEventDebounceTime,
   );
   const setIsNotOverDebounced = React.useCallback(
-    (value: boolean) => {
-      _setIsNoteOverDebounced(value).catch(() => {});
+    (_value: boolean) => {
+      _setIsNoteOverDebounced(_value).catch(() => {});
     },
     [_setIsNoteOverDebounced],
   );
@@ -78,7 +78,7 @@ export default function ({ name, link, notes }: Props) {
     }
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
+  const handleDragLeave = (_e: React.DragEvent) => {
     // Don't set to false immediately
     // The child item will take drag event and trigger drag leave
     // but it won't handle it and will trigger drag over again

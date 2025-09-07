@@ -5,7 +5,7 @@ import {
   createTag,
   createNotebook,
 } from "./noteData";
-import type { Config, Rule, NoteData, UpdateQuery } from "./types";
+import type { Config, Rule, NoteData } from "./types";
 
 type RuleFactory = (
   ruleValue: string | string[],

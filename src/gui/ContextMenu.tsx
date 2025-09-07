@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
 import { Backdrop } from "./Backdrop";
 
-const CLOSE_EVENTS = ["click", "contextmenu", "wheel"];
+const _CLOSE_EVENTS = ["click", "contextmenu", "wheel"];
 const MENU_WIDTH = 150;
 
 export default function ({

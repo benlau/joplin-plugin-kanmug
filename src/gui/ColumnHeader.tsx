@@ -59,7 +59,7 @@ export const ColumnHeader = ({ name, link }: Props) => {
         payload: { link },
       });
     }
-  }, [name, link, send]);
+  }, [link, send]);
 
   const [isNewNoteDisabled, setIsNewNoteDisabled] = useRefState(false);
 
@@ -75,7 +75,7 @@ export const ColumnHeader = ({ name, link }: Props) => {
         colName: name,
       },
     });
-  }, [name, dispatch]);
+  }, [name, dispatch, isNewNoteDisabled, setIsNewNoteDisabled]);
 
   return (
     <Container>

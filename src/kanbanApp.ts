@@ -13,9 +13,7 @@ import {
   NoteData,
   NoteDataMonad,
   accessBoardState,
-  BoardStateColumn,
   Message,
-  TimeoutError,
 } from "./types";
 import { RecentKanbanStore } from "./recentKanbanStore";
 import { Debouncer } from "./utils/debouncer";
@@ -25,7 +23,6 @@ import {
   getAllNotebooks,
   getAllTags,
   getConfigNote,
-  getNoteById,
   searchNotes,
   setConfigNote,
 } from "./noteData";
@@ -250,7 +247,7 @@ export class KanbanApp {
     const updates = this.openBoard.getBoardUpdate(msg, oldState);
 
     if (this.debug) {
-      console.log("raw updates", updates);
+      console.debug("raw updates", updates);
     }
 
     const postProcessingRuleState: PostProcessingRuleState = {
@@ -264,7 +261,7 @@ export class KanbanApp {
 
     for (const query of newRuleState.updates) {
       if (this.debug) {
-        console.log("updateBoardByAction", query);
+        console.debug("updateBoardByAction", query);
       }
       await executeUpdateQuery(query);
       this.openBoard.executeUpdateQuery(query);
@@ -274,7 +271,7 @@ export class KanbanApp {
 
     for (const command of newRuleState.commands) {
       if (this.debug) {
-        console.log("command", command);
+        console.debug("command", command);
       }
       if (command.type === "warning") {
         this.joplinService.toast(command.message, "error", command.duration);
@@ -287,7 +284,7 @@ export class KanbanApp {
 
   async postInsertNoteToColumn(msg: InsertNoteToColumnAction) {
     if (!this.openBoard) return;
-    const { noteId, columnName, index } = msg.payload;
+    const { noteId } = msg.payload;
     const noteData = await this.joplinService.getNoteDataById(noteId);
     noteData.order = Date.now();
     this.openBoard.appendNoteCache(noteData);
@@ -300,7 +297,7 @@ export class KanbanApp {
    */
   async handleKanbanMessage(msg: Action) {
     if (this.debug) {
-      console.log("handleKanbanMessage", msg);
+      console.debug("handleKanbanMessage", msg);
     }
 
     // For messages that work even if no board is opened
@@ -370,7 +367,7 @@ export class KanbanApp {
           } else {
             this.joplinService.openNote(link);
           }
-        } catch (error) {
+        } catch (_error) {
           this.joplinService.toast(
             `Error: Could not open note with ID ${link}`,
             "error",
@@ -708,9 +705,9 @@ export class KanbanApp {
   postMessageToPanel(payload: any) {
     if (this.debug) {
       if (!this.boardView) {
-        console.log("No board view");
+        console.debug("No board view");
       }
-      console.log("postMessageToPanel", payload);
+      console.debug("postMessageToPanel", payload);
     }
     if (this.boardView) {
       joplin.views.panels.postMessage(this.boardView, payload);

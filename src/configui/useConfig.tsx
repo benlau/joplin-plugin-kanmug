@@ -8,7 +8,7 @@ export default function (editedPath: string, inputConfig: Config) {
     string,
     string,
   ];
-  const [editedColIdx, setEditedColIdx] = useState(
+  const [editedColIdx, _setEditedColIdx] = useState(
     colIdxStr === null ? null : parseInt(colIdxStr),
   );
 
@@ -41,7 +41,7 @@ export default function (editedPath: string, inputConfig: Config) {
         return newObj;
       });
     }
-  }, ["tag" in editedObj]);
+  }, [editedObj]);
 
   const isBacklog = "backlog" in editedObj && editedObj.backlog;
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function (editedPath: string, inputConfig: Config) {
         return newObj;
       });
     }
-  }, [isBacklog, Object.keys(editedObj).length]);
+  }, [isBacklog, editedObj]);
 
   const outObjEntries = Object.entries(editedObj)
     .map(([prop, val]) =>

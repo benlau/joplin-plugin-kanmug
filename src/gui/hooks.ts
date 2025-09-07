@@ -32,7 +32,7 @@ export function useRemoteBoard(): [
 
   useEffect(() => {
     dispatch({ type: "load" });
-  }, []);
+  }, [dispatch]);
 
   return [state.board, dispatch, send];
 }

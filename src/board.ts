@@ -366,18 +366,18 @@ export default class Board {
     const notesInCol = boardState.columns?.find(
       (col) => col.name === newColumnName,
     )?.notes as NoteData[];
-    const notes = notesInCol.filter((note) => note.id !== noteId);
-    if (notes.length > 0) {
+    const notesInColFiltered = notesInCol.filter((note) => note.id !== noteId);
+    if (notesInColFiltered.length > 0) {
       if (newIndex === 0) {
         setOrder(noteId, Date.now());
-      } else if (newIndex >= notes.length) {
-        setOrder(noteId, notes[notes.length - 1].order - ORDER_STEP);
+      } else if (newIndex >= notesInColFiltered.length) {
+        setOrder(noteId, notesInColFiltered[notesInColFiltered.length - 1].order - ORDER_STEP);
       } else {
-        const prevItem = notes[newIndex - 1];
-        const nextItem = notes[newIndex];
+        const prevItem = notesInColFiltered[newIndex - 1];
+        const nextItem = notesInColFiltered[newIndex];
         const newOrder = Math.floor((prevItem.order + nextItem.order) / 2);
         setOrder(noteId, newOrder);
-        const notesAfter = notesInCol.slice(newIndex);
+        const notesAfter = notesInColFiltered.slice(newIndex);
         let prevOrder = newOrder;
         for (const note of notesAfter) {
           if (note.order >= prevOrder) {
@@ -434,11 +434,6 @@ export default class Board {
     ) as Column;
     const setQueries = newCol.rules.flatMap((r) => r.set(noteId));
     queries.push(...setQueries);
-
-    const notesInCol = boardState.columns?.find(
-      (col) => col.name === columnName,
-    )?.notes as NoteData[];
-    const notes = notesInCol.filter((note) => note.id !== noteId);
 
     // Set order for the new note
     const timestamp = Date.now();

@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 import ClickableCard from "./ClickableCard";
 import { useDraggableCard, useDroppableCard } from "./DragDrop";
 import type { NoteData } from "../types";
-import ContextMenu from "./ContextMenu";
 
 interface DraggableCardProps {
   note: NoteData;

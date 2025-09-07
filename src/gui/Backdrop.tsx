@@ -19,21 +19,21 @@ export function Backdrop({ children, isOpened, onClose }: BackdropProps) {
   );
 
   const onClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
+    (_e: React.MouseEvent<HTMLDivElement>) => {
       onClose();
     },
     [onClose],
   );
 
   const onContextMenu = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
+    (_e: React.MouseEvent<HTMLDivElement>) => {
       onClose();
     },
     [onClose],
   );
 
   const onWheel = useCallback(
-    (e: React.WheelEvent<HTMLDivElement>) => {
+    (_e: React.WheelEvent<HTMLDivElement>) => {
       onClose();
     },
     [onClose],
