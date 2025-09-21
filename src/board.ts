@@ -305,6 +305,8 @@ export default class Board {
             return this.moveNoteToTop(action.payload.noteId, action.payload.columnName, boardState);
         case "moveNoteToBottom":
             return this.moveNoteToBottom(action.payload.noteId, action.payload.columnName, boardState);
+        case "moveNoteToColumn":
+            return this.moveNote(action.payload.noteId, action.payload.to, action.payload.from, 0, boardState);
         case "removeNoteFromKanban":
             return this.removeNoteFromKanban(action.payload.noteId, boardState);
         }

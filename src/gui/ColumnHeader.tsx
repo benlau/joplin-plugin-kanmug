@@ -82,13 +82,13 @@ export const ColumnHeader = ({ name, link }: Props) => {
             {
                 link ? (
                     <ColumnTitle onClick={handleTitleClick}>
-                        {name}
+                        <h2>{name}</h2>
                     </ColumnTitle>
                 ) : (
-                    <span>{name}</span>
+                    <h2>{name}</h2>
                 )
             }
-            <AddIconCont onClick={handleNewNote}>
+            <AddIconCont role="button" aria-label="Add new note" onClick={handleNewNote}>
                 <IoMdAdd />
             </AddIconCont>
         </Container>

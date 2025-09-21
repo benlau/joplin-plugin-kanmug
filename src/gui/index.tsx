@@ -14,6 +14,7 @@ import Column from "./Column";
 import type { Board, BoardState, Message } from "../types";
 import { MainContext, useMainContext } from "./MainContext";
 import { RecentKanbansPanel, useRecentKanbansPanelHandle } from "./RecentKanbansPanel";
+import { AnnouncerContext } from "./useAnnouncer";
 
 export const DispatchContext = React.createContext<DispatchFn>(async () => {});
 export const IsWaitingContext = React.createContext<boolean>(false);
@@ -153,6 +154,8 @@ function Content(props: { board?: BoardState }) {
         <Container>
             <Header>
                 <IconCont
+                    role="button"
+                    aria-label="Close Kanban"
                     onClick={closeKanban}
                 >
                     <IoMdClose size="20px"/>
@@ -160,18 +163,22 @@ function Content(props: { board?: BoardState }) {
                 <BoardTitle
                     onClick={() => send({ type: "openKanbanConfigNote" })}
                 >
-                    {board.name}
+                    <h1>{board.name}</h1>
                 </BoardTitle>
 
-                <IconCont onClick={handleShowRecentKanban}>
+                <IconCont role="button" aria-label="Show recent Kanbans" onClick={handleShowRecentKanban}>
                     <MdOutlineViewKanban size="25px" />
                 </IconCont>
                 <IconCont
+                    role="button"
+                    aria-label="Refresh Kanban"
                     onClick={handleRefresh}
                 >
                     <IoMdRefresh size="25px" />
                 </IconCont>
                 <IconCont
+                    role="button"
+                    aria-label="Settings"
                     onClick={() => dispatch({ type: "settings", payload: { target: "filters" } })
                     }
                 >
@@ -179,6 +186,8 @@ function Content(props: { board?: BoardState }) {
                 </IconCont>
 
                 <IconCont
+                    role="button"
+                    aria-label="Add new column"
                     onClick={() => dispatch({ type: "settings", payload: { target: "columnnew" } })
                     }
                 >
@@ -230,17 +239,46 @@ function App() {
     const mainContextValue = React.useMemo(() => ({
         dispatch,
         send,
-    }), [dispatch, send]);
+        board,
+    }), [dispatch, send, board]);
+
+    const announcerRef = React.useRef<HTMLDivElement>(null);
+    const announce = React.useCallback((message: string) => {
+        if (announcerRef.current) {
+            announcerRef.current.textContent = "";
+            announcerRef.current.textContent = message;
+        }
+    }, []);
+
+    const announcerContextValue = React.useMemo(() => ({ announce }), [announce]);
 
     // @TODO: Remove DispatchContext.Provider
     return (
-        <MainContext.Provider value={mainContextValue}>
-            <DispatchContext.Provider value={dispatch}>
-                <DragDropContext>
-                    <Content board={board} />
-                </DragDropContext>
-            </DispatchContext.Provider>
-        </MainContext.Provider>
+        <AnnouncerContext.Provider value={announcerContextValue}>
+            <MainContext.Provider value={mainContextValue}>
+                <DispatchContext.Provider value={dispatch}>
+                    <DragDropContext>
+                        <Content board={board} />
+                    </DragDropContext>
+                </DispatchContext.Provider>
+            </MainContext.Provider>
+            <div
+                ref={announcerRef}
+                style={{
+                    position: "absolute",
+                    width: "1px",
+                    height: "1px",
+                    padding: "0",
+                    margin: "-1px",
+                    overflow: "hidden",
+                    clip: "rect(0, 0, 0, 0)",
+                    whiteSpace: "nowrap",
+                    border: "0",
+                }}
+                aria-live="assertive"
+                aria-atomic="true"
+            />
+        </AnnouncerContext.Provider>
     );
 }
 

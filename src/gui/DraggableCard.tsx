@@ -17,10 +17,9 @@ export default function ({
     note, colName, index, isAtTop, isAtBottom,
 }: DraggableCardProps) {
     const ref = useRef<HTMLDivElement>(null);
-    const cardRef = useRef<HTMLDivElement>(null);
     const { handlerId, withPlaceholder } = useDroppableCard({
         ref,
-        contentRef: cardRef,
+        contentRef: ref, // Pass the same ref for both
         colName,
         noteId: note.id,
         index,
@@ -43,7 +42,7 @@ export default function ({
             onDragStart={onDragStart}
         >
             {withPlaceholder(
-                <ClickableCard ref={cardRef} note={note} colName={colName} isAtTop={isAtTop} isAtBottom={isAtBottom} />,
+                <ClickableCard note={note} colName={colName} isAtTop={isAtTop} isAtBottom={isAtBottom} />,
             )}
         </div>
     );
